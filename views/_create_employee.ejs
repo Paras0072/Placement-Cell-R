@@ -1,38 +1,49 @@
-<div class="mb-3">
-    <label for="input-username" class="form-label">User Name</label>
-    <input type="text" class="form-control" id="input-username" name="username" />
-  </div>
-  
-  <div class="mb-3">
-    <label for="input-email" class="form-label">Email address</label>
-    <input
-      type="email"
-      class="form-control"
-      id="input-email"
-      placeholder="name@example.com"
-      name="email"
-    />
-  </div>
-  
-  <div class="mb-3">
-    <label for="input-password" class="form-label">Password</label>
-    <input
-      type="password"
-      class="form-control"
-      id="input-password"
-      name="password"
-    />
-  </div>
-  
-  <div class="mb-3">
-    <label for="input-confirm-password" class="form-label"
-      >Confirm Password</label
-    >
-    <input
-      type="password"
-      class="form-control"
-      id="input-confirm-password"
-      name="confirm_password"
-    />
-  </div>
-  
+<div class="input-group">
+  <input type="text" required id="username" name="username" />
+  <label for="username">Username</label>
+</div>
+<div class="input-group">
+  <input type="email" id="email" required name="email" />
+  <label for="email">Email Address</label>
+</div>
+<div class="input-group1">
+  <input
+    type="password"
+    id="password"
+    name="password"
+    required
+    class="password-input"
+  />
+
+  <label for="password">Password</label>
+  <img
+    src="/eye-close.png"
+    class="password-toggle"
+    id="eyeicon"
+    onclick="switchVisibility()"
+  />
+</div>
+<div class="input-group">
+  <input
+    type="password"
+    id="confirm_password"
+    name="confirm_password"
+    required
+  />
+  <label for="confirm_password"> Confirm Password</label>
+</div>
+
+<script>
+  let eyeicon = document.getElementById("eyeicon");
+  let password = document.getElementById("password");
+
+  eyeicon.onclick = function () {
+    if (password.type === "password") {
+      password.type = "text";
+      eyeicon.src = "eye-open.png";
+    } else {
+      password.type = "password";
+      eyeicon.src = "eye-close.png";
+    }
+  };
+</script>

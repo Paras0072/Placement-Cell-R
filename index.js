@@ -4,7 +4,7 @@ const cookieParser = require("cookie-parser");
 const app = express();
 
 // require ('dotenv').config();
-const port = process.env.PORT || 8000;
+const port = 8000;
 const db = require("./config/mongoose");
 
 app.use(
@@ -17,10 +17,17 @@ app.use(
 const session = require("express-session");
 const passport = require("passport");
 const passportLocal = require("./config/passport");
-
+const expressLayouts = require("express-ejs-layouts");
+const flash = require("connect-flash");
+const customWareFlash = require("./config/middleware");
 const MongoStore = require("connect-mongo");
 
 app.use(cookieParser());
+app.use(express.static("./assets"));
+// setup express layouts
+app.use(expressLayouts);
+app.set("layout extractStyles", true);
+app.set("layout extractScripts", true);
 
 // set up view engine
 app.set("view engine", "ejs");
@@ -38,7 +45,7 @@ app.use(
     },
     store: MongoStore.create({
       mongoUrl:
-        "mongodb+srv://nazimnn459:OmO9gknXwYO54IA6@cluster0.iz9lwls.mongodb.net/",
+        "mongodb+srv://Placementcell:Placement@cluster0.uobdejz.mongodb.net/",
       autoRemove: "disabled",
     }),
     function(err) {
@@ -52,7 +59,8 @@ app.use(passport.session());
 
 // sets the authenticated user in the response
 app.use(passport.setAuthenticatedUser);
-
+app.use(flash());
+app.use(customWareFlash.setFlash);
 // using express routers
 app.use(require("./routes"));
 
